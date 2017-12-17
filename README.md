@@ -1,4 +1,4 @@
-# My first DApp
+# My first ÐApp
 
 This is a small Solidity Smart Contract meant to run on Ethereum blockchain that I wrote out of curiosity.
 
@@ -15,6 +15,7 @@ This is a small Solidity Smart Contract meant to run on Ethereum blockchain that
 ### Useful links:
 * [First followed tutorial](https://medium.com/@ConsenSys/a-101-noob-intro-to-programming-smart-contracts-on-ethereum-695d15c1dab4).
 * [Solidity docs](http://solidity.readthedocs.io).
+* [Truffle docs](http://truffleframework.com/docs/getting_started/testing)
 
 ### Remaining work
 * Add more tests especially on the `require()` edge case rejections.
