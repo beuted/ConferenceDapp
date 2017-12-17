@@ -16,7 +16,8 @@ contract Conference {
   }
 
   function buyTicket() public payable returns (bool success) { 
-     require(numRegistrants < quota);
+     require(numRegistrants < quota); // Avoid having more than the quota
+     require(registrantsPaid[msg.sender] == uint(0x0)); // Avoid having the same public key registering twice
      registrantsPaid[msg.sender] = msg.value;
      numRegistrants++;
      Deposit(msg.sender, msg.value);
@@ -25,6 +26,8 @@ contract Conference {
 
   function changeQuota(uint newquota) public {
     if (msg.sender != organizer) { return; }
+    if (numRegistrants > newquota) { return; } // Avoid setting the quota lower than the current number of participants
+
     quota = newquota;
   }
 
