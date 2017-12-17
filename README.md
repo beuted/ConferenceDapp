@@ -10,6 +10,7 @@ This is a small Solidity Smart Contract meant to run on Ethereum blockchain that
 * Start a local server for the UI running `npm run dev` inside `/app`.
 * Browse [http://localhost:8080](http://localhost:8080).
 
+![screenshot](https://github.com/beuted/ConferenceDapp/blob/master/Capture.PNG?raw=true "Screenshot")
 ----
 
 ### Useful links:
