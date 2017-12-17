@@ -55,16 +55,16 @@ var refreshConferenceInfos = function(conference, userPubKey) {
 
     var balance = web3.eth.getBalance(conference.address).toNumber();
     var confBalanceElt = document.getElementById('conference-eth-balance');
-    confBalanceElt.innerHTML = balance;
+    confBalanceElt.innerHTML = web3.fromWei(balance, 'ether') + " Eth";
 
     conference.quota.call().then(quota => {
         var confQuotaElt = document.getElementById('max-registrations-count');
-        confQuotaElt.innerHTML = quota;
+        confQuotaElt.innerHTML = quota + " people max";
     });
 
     conference.numRegistrants.call().then(numRegistrants => {
         var numRegistrantsElt = document.getElementById('registrations-count');
-        numRegistrantsElt.innerHTML = numRegistrants;
+        numRegistrantsElt.innerHTML = numRegistrants + " people attending";
     });
 
     conference.organizer.call().then(confOwner => {
@@ -75,8 +75,12 @@ var refreshConferenceInfos = function(conference, userPubKey) {
             confOwnerElt.innerHTML += " (you)"
     });
 
-     conference.registrantsPaid().then(registrantsPaid => {
-         console.log(registrantsPaid.keys);
+     conference.registrantsPaid.call(userPubKey).then(registrantsPaid => {
+         var paidForConfElt = document.getElementById('paid-for-conf');
+         if (registrantsPaid.toNumber(10) == 0)
+            paidForConfElt.innerHTML = "You haven't paid to access the conference";
+        else
+             paidForConfElt.innerHTML = "You already paid " + web3.fromWei(registrantsPaid.toNumber(10)) + " Eth to access the conference !";
      });
 
     isValidContactSelected();
