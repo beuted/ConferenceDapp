@@ -1,0 +1,19 @@
+{
+  "name": "conference",
+  "version": "0.0.1",
+  "description": "Decentralised application made to test shit around",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --no-content-base"
+  },
+  "author": "Benoit Jehanno",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "web3": "~0.18",
+    "json-loader": "~0.5",
+    "truffle-contract": "~1",
+    "webpack": "~2",
+    "webpack-dev-server": "~2",
+    "bootstrap": "~3"
+  }
+}
