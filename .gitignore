@@ -3,4 +3,5 @@ app/pricebuild/bundle.js
 npm-debug.log*
 /build
 /app/build/bundle.js
-
+.DS_Store
+DONTPUSHME.md
