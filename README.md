@@ -11,6 +11,16 @@ This is a small Solidity Smart Contract meant to run on Ethereum blockchain that
 * Browse [http://localhost:8080](http://localhost:8080).
 
 ![screenshot](https://github.com/beuted/ConferenceDapp/blob/master/Capture.PNG?raw=true "Screenshot")
+
+## Deploying on rinkeby testnet
+
+You'll need to run a (full?) node with rpc api while unlocking your user.
+`./geth --rinkeby --rpc --rpcapi db,eth,net,web3,personal --unlock="0x876eFa89F781cDac975bcd28290696632B18D88d"`
+Download the blockchain to sync your node and then connect to your account on rinkeby.
+
+Then you can migrate with the "rinkeby" configuration (see truffle.config)
+`truffle migrate --network rinkeby`
+
 ----
 
 ### Useful links:

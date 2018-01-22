@@ -24,12 +24,18 @@ window.onload = function() {
     Conference.setProvider(web3.currentProvider);
 
     // Get defined accounts on the client
-    var rndAccId = Math.floor(Math.random()*10)
-    DApp.userAccount = web3.eth.accounts[rndAccId];
+    web3.eth.getAccounts(function(error, result) {
+        if (error != null)
+            console.log("Couldn't get accounts, error: " + error);
 
-    refreshUserInfos(DApp.userAccount);
+        // Pick a random account, becasue why not
+        var rndAccId = Math.floor(Math.random() * result.length)
+        DApp.userAccount = result[rndAccId];
 
-    isValidContactSelected();
+        refreshUserInfos(DApp.userAccount);
+
+        isValidContactSelected();
+    });
 };
 
 // Refrehs the UI every 10 sec
@@ -44,18 +50,20 @@ var refreshUserInfos = function(account) {
     var ethPubKeyElt = document.getElementById('public-key');
     ethPubKeyElt.innerHTML = account;
 
-    var balance = web3.eth.getBalance(account).toNumber();
-    var ethBalanceElt = document.getElementById('eth-balance');
-    ethBalanceElt.innerHTML = web3.fromWei(balance, 'ether');
+    web3.eth.getBalance(account, (error, balance) => {
+        var ethBalanceElt = document.getElementById('eth-balance');
+        ethBalanceElt.innerHTML = web3.fromWei(balance.toNumber(), 'ether');
+    });
 }
 
 var refreshConferenceInfos = function(conference, userPubKey) {
     var confPubKeyElt = document.getElementById('conference-eth-address');
     confPubKeyElt.innerHTML = conference.address
 
-    var balance = web3.eth.getBalance(conference.address).toNumber();
-    var confBalanceElt = document.getElementById('conference-eth-balance');
-    confBalanceElt.innerHTML = web3.fromWei(balance, 'ether') + " Eth";
+    web3.eth.getBalance(conference.address, (error, balance) => {
+        var confBalanceElt = document.getElementById('conference-eth-balance');
+        confBalanceElt.innerHTML = web3.fromWei(balance.toNumber(), 'ether') + " Eth";
+    });
 
     conference.quota.call().then(quota => {
         var confQuotaElt = document.getElementById('max-registrations-count');
